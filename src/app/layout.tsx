@@ -7,9 +7,8 @@
 
 import type { Metadata } from "next";
 import {
-  Cormorant_Garamond,
   IBM_Plex_Mono,
-  Manrope,
+  Noto_Sans_SC,
 } from "next/font/google";
 import "./globals.css";
 import {
@@ -22,15 +21,16 @@ import {
   SITE_DESCRIPTION,
 } from "@/lib/constants";
 
-const bodyFont = Manrope({
+const bodyFont = Noto_Sans_SC({
   subsets: ["latin"],
+  weight: ["400", "500", "700"],
   variable: "--font-body",
   display: "swap",
 });
 
-const displayFont = Cormorant_Garamond({
+const displayFont = Noto_Sans_SC({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["700", "900"],
   variable: "--font-display",
   display: "swap",
 });

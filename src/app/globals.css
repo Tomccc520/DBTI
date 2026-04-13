@@ -35,9 +35,11 @@ body {
   font-family:
     var(--font-body),
     "PingFang SC",
+    "Hiragino Sans GB",
     "Helvetica Neue",
     "Noto Sans SC",
     sans-serif;
+  letter-spacing: 0.01em;
   background:
     radial-gradient(circle at 12% 14%, rgba(255, 107, 44, 0.18), transparent 22%),
     radial-gradient(circle at 86% 18%, rgba(47, 107, 255, 0.12), transparent 22%),
@@ -62,8 +64,13 @@ button {
 .display-font {
   font-family:
     var(--font-display),
-    "Times New Roman",
-    serif;
+    "PingFang SC",
+    "Hiragino Sans GB",
+    "Helvetica Neue",
+    "Noto Sans SC",
+    sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.03em;
 }
 
 .surface-panel {

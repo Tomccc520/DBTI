@@ -269,10 +269,10 @@ export default function ResultPage() {
 
       ctx.fillStyle = "#101116";
       ctx.font = `700 ${px(24)}px Avenir Next, sans-serif`;
-      ctx.fillText("测测你在设计圈到底是哪挂", px(228), px(1188));
+      ctx.fillText("测测你平时到底怎么出手", px(228), px(1188));
       ctx.fillStyle = personality.color;
       ctx.font = `800 ${px(20)}px Avenir Next, sans-serif`;
-      ctx.fillText("扫码继续测试", px(228), px(1232));
+      ctx.fillText("扫码去开测", px(228), px(1232));
       ctx.fillStyle = "rgba(16, 17, 22, 0.5)";
       ctx.font = `${px(16)}px Avenir Next, sans-serif`;
       ctx.fillText("30 道题 · 5 大模型 · 27+1 人格", px(228), px(1268));
@@ -293,7 +293,7 @@ export default function ResultPage() {
       <div className="flex min-h-screen items-center justify-center">
         <div className="surface-panel rounded-[30px] px-8 py-7 text-center">
           <div className="mx-auto h-12 w-12 animate-spin rounded-full border-4 border-black/16 border-t-black/70" />
-          <p className="mt-4 text-sm text-black/56">正在给你的设计画风开号...</p>
+          <p className="mt-4 text-sm text-black/56">正在给你的工作流开号...</p>
         </div>
       </div>
     );
@@ -306,7 +306,7 @@ export default function ResultPage() {
     items: dimensions.filter((item) => item.model === model),
   }));
   const topMatches = matchDetails.slice(0, 3);
-  const shareText = `我在 ${SITE_NAME} ${SITE_FULL_NAME} 里被鉴定成【${personality.code} · ${personality.name}】\n「${personality.motto}」\n贴脸程度 ${similarity}%\n\n来测测你到底更像站酷封面脑、小红书种草体、脉脉求生派，还是大厂过会王 👉 ${getSiteUrl()}`;
+  const shareText = `我在 ${SITE_NAME} ${SITE_FULL_NAME} 里被鉴定成【${personality.code} · ${personality.name}】\n「${personality.motto}」\n贴脸程度 ${similarity}%\n\n来测测你在开稿、改稿、对需求、过会和工具共创时，到底会怎么出手 👉 ${getSiteUrl()}`;
 
   /**
    * 复制分享文案到剪贴板。
@@ -353,7 +353,7 @@ export default function ResultPage() {
           <span className="font-mono text-sm font-black tracking-[0.32em] text-black/82">
             {SITE_NAME}
           </span>
-          <span className="font-mono text-xs text-black/42">RESULT</span>
+          <span className="font-mono text-xs text-black/42">开号结果</span>
         </div>
       </header>
 
@@ -363,10 +363,10 @@ export default function ResultPage() {
             <div className="result-stage-glow" style={{ backgroundColor: personality.color }} />
             <div className="relative z-10">
               <div className="flex flex-wrap items-center gap-3">
-                <span className="editorial-kicker">Best Match</span>
+                <span className="editorial-kicker">本命结果</span>
                 {result.isSpecial && (
                   <span className="metric-pill" style={{ color: personality.color }}>
-                    隐藏人格已触发
+                    隐藏款已掉落
                   </span>
                 )}
               </div>
@@ -399,8 +399,8 @@ export default function ResultPage() {
                         {similarity}%
                       </strong>
                     </span>
-                    <span className="metric-pill">15 维已分析</span>
-                    <span className="metric-pill">圈层黑话已翻译</span>
+                    <span className="metric-pill">15 维已拆完</span>
+                    <span className="metric-pill">出手路数已开盒</span>
                   </div>
                 </div>
 
@@ -419,8 +419,8 @@ export default function ResultPage() {
           <div className="space-y-8">
             <section className="border-b border-black/10 pb-8">
               <div className="flex items-center justify-between">
-                <span className="editorial-kicker">Model Snapshot</span>
-                <span className="text-sm text-black/42">五维轮廓</span>
+                <span className="editorial-kicker">五维侧写</span>
+                <span className="text-sm text-black/42">工作流雷达</span>
               </div>
               <div className="mt-6 flex justify-center lg:justify-start">
                 <RadarChart dimensions={dimensions} size={320} />
@@ -430,7 +430,7 @@ export default function ResultPage() {
             {topMatches.length > 0 && (
               <section>
                 <div className="mb-4 font-mono text-xs font-black tracking-[0.24em] text-black/38">
-                  CLOSEST NEIGHBORS
+                  相邻人格
                 </div>
                 <div className="border-t border-black/10">
                   {topMatches.map((item, index) => (
@@ -459,10 +459,10 @@ export default function ResultPage() {
       <div className="mx-auto max-w-7xl px-5 py-10 md:px-8">
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
           <section>
-            <span className="editorial-kicker">Traits</span>
+            <span className="editorial-kicker">人格拆解</span>
             <div className="mt-6 border-t border-black/10">
               <div className="ledger-row">
-                <div className="font-semibold text-black/86">优势</div>
+                <div className="font-semibold text-black/86">拿手活</div>
                 <div className="col-span-2 flex flex-wrap gap-2">
                   {personality.strengths.map((item) => (
                     <span key={item} className="metric-pill">
@@ -472,7 +472,7 @@ export default function ResultPage() {
                 </div>
               </div>
               <div className="ledger-row">
-                <div className="font-semibold text-black/86">注意</div>
+                <div className="font-semibold text-black/86">易翻车点</div>
                 <div className="col-span-2 flex flex-wrap gap-2">
                   {personality.weaknesses.map((item) => (
                     <span key={item} className="metric-pill">
@@ -482,13 +482,13 @@ export default function ResultPage() {
                 </div>
               </div>
               <div className="ledger-row">
-                <div className="font-semibold text-black/86">工作流</div>
+                <div className="font-semibold text-black/86">常用套路</div>
                 <div className="col-span-2 text-sm leading-7 text-black/58">
                   {personality.techStack}
                 </div>
               </div>
               <div className="ledger-row">
-                <div className="font-semibold text-black/86">一句话</div>
+                <div className="font-semibold text-black/86">精神状态</div>
                 <div className="col-span-2 text-sm italic leading-7 text-black/58">
                   「{personality.spirit}」
                 </div>
@@ -497,26 +497,26 @@ export default function ResultPage() {
 
             <div className="mt-10 border-t border-black/10 pt-6">
               <div className="mb-4 font-mono text-xs font-black tracking-[0.24em] text-black/38">
-                SHARE COPY
+                转发文案
               </div>
               <p className="whitespace-pre-line text-sm leading-8 text-black/62">
                 {shareText}
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <button onClick={handleCopy} className="primary-button">
-                  {copied ? "已复制文案" : "复制分享文案"}
+                  {copied ? "已复制文案" : "复制转发文案"}
                 </button>
                 <button
                   onClick={posterUrl ? handleSavePoster : generatePoster}
                   className="ghost-button"
                 >
-                  {generatingPoster ? "海报生成中..." : posterUrl ? "保存海报" : "生成海报"}
+                  {generatingPoster ? "海报渲染中..." : posterUrl ? "保存海报" : "生成转发海报"}
                 </button>
               </div>
 
               {posterUrl && (
                 <div className="mt-6 fade-in">
-                  <p className="mb-3 text-sm text-black/44">长按或下载保存这张海报</p>
+                  <p className="mb-3 text-sm text-black/44">长按或下载，直接就能转发这张海报</p>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={posterUrl}
@@ -534,9 +534,9 @@ export default function ResultPage() {
               className="flex w-full items-center justify-between border-b border-black/10 pb-5 text-left"
             >
               <div>
-                <span className="editorial-kicker">Dimension Details</span>
+                <span className="editorial-kicker">十五维明细</span>
                 <h2 className="display-font mt-4 text-4xl leading-tight text-black">
-                  十五维黑话拆解
+                  十五维开盒账本
                 </h2>
               </div>
               <span className="text-sm text-black/42">{showDetails ? "收起" : "展开"}</span>
@@ -591,7 +591,7 @@ export default function ResultPage() {
             }}
             className="ghost-button"
           >
-            重新测试
+            重新开测
           </button>
           <button onClick={() => router.push("/")} className="primary-button">
             回到首页

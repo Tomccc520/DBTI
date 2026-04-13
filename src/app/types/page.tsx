@@ -34,14 +34,14 @@ export default function TypesPage() {
             {SITE_NAME}
           </span>
           <Link href="/test" className="text-sm text-black/52 transition hover:text-black">
-            去测试 →
+            去开测 →
           </Link>
         </div>
       </header>
 
       <div className="mx-auto grid max-w-7xl gap-10 px-5 py-8 md:px-8 lg:grid-cols-[360px_1fr]">
         <aside className="lg:sticky lg:top-[88px] lg:h-fit">
-          <span className="editorial-kicker">Current Persona</span>
+          <span className="editorial-kicker">当前人格</span>
           <div className="mt-6 border-t border-black/10 pt-6">
             <div className="flex items-center justify-center rounded-[36px] border border-black/10 bg-white/48 p-8">
               <CharacterSVG
@@ -66,7 +66,7 @@ export default function TypesPage() {
 
             <div className="mt-8 space-y-5 border-t border-black/10 pt-6 text-sm leading-7 text-black/58">
               <div>
-                <div className="font-semibold text-black/84">优势</div>
+                <div className="font-semibold text-black/84">拿手活</div>
                 <div className="mt-2 flex flex-wrap gap-2">
                   {current.strengths.map((item) => (
                     <span key={item} className="metric-pill">
@@ -76,7 +76,7 @@ export default function TypesPage() {
                 </div>
               </div>
               <div>
-                <div className="font-semibold text-black/84">注意</div>
+                <div className="font-semibold text-black/84">易翻车点</div>
                 <div className="mt-2 flex flex-wrap gap-2">
                   {current.weaknesses.map((item) => (
                     <span key={item} className="metric-pill">
@@ -86,7 +86,7 @@ export default function TypesPage() {
                 </div>
               </div>
               <div>
-                <div className="font-semibold text-black/84">工作流关键词</div>
+                <div className="font-semibold text-black/84">常用套路</div>
                 <p className="mt-2">{current.techStack}</p>
               </div>
             </div>
@@ -96,12 +96,13 @@ export default function TypesPage() {
         <section>
           <div className="flex flex-col gap-4 border-b border-black/10 pb-6 md:flex-row md:items-end md:justify-between">
             <div>
-              <span className="editorial-kicker">Library</span>
+              <span className="editorial-kicker">人格总表</span>
               <h2 className="display-font mt-4 text-4xl leading-tight text-black md:text-5xl">
-                全部人格黑话库
+                全部人格开盒库
               </h2>
               <p className="mt-4 max-w-2xl text-sm leading-7 text-black/58 md:text-base">
-                这里不做小卡片拼盘，而是把每个人格当成一条可快速扫描的档案。点选右侧任意条目，左侧会同步更新人格主视图。
+                这里不做小卡片拼盘，而是把每个人格摊成一条能快速扫读的档案。
+                点右侧任意条目，左侧就会立刻切到对应主视图。
               </p>
             </div>
             <div className="text-sm text-black/42">
@@ -141,11 +142,11 @@ export default function TypesPage() {
                   <div className="justify-self-end">
                     {type.code === specialPersonality.code ? (
                       <span className="rounded-full border border-black/10 bg-black px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white">
-                        Hidden
+                        隐藏款
                       </span>
                     ) : (
                       <span className="font-mono text-xs font-black tracking-[0.18em] text-black/34">
-                        OPEN
+                        可开盒
                       </span>
                     )}
                   </div>

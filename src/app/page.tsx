@@ -74,10 +74,10 @@ export default function Home() {
           </Link>
           <div className="flex items-center gap-3 text-sm text-black/58">
             <Link href="/types" className="hidden md:inline-block hover:text-black/92">
-              人格库
+              人格档案
             </Link>
             <Link href="/test" className="secondary-button">
-              开始测试
+              去开测
             </Link>
           </div>
         </div>
@@ -114,7 +114,7 @@ export default function Home() {
                 现在开测
               </Link>
               <Link href="/types" className="ghost-button">
-                先看人格库
+                先翻人格档案
               </Link>
             </div>
           </div>
@@ -122,7 +122,7 @@ export default function Home() {
           <div className="hero-art fade-in">
             <div className="hero-art-frame">
               <div className="hero-art-meta">
-                <span>Designer Persona Preview</span>
+                <span>人格样张</span>
                 <span>Vol.01</span>
               </div>
 
@@ -137,14 +137,16 @@ export default function Home() {
 
               <div className="hero-art-caption">
                 <p className="font-mono text-[11px] font-black uppercase tracking-[0.22em] text-black/40">
-                  What You Get
+                  测完你能拿到什么
                 </p>
                 <h2 className="display-font mt-4 text-4xl leading-tight text-black md:text-5xl">
-                  一次测试，直接给你成体系的结果页。
+                  测完不是一句话糊弄你，
+                  <br />
+                  是直接把你的出手路数摊开。
                 </h2>
                 <p className="mt-4 max-w-md text-sm leading-7 text-black/56">
-                  不再把首页做成信息墙，只保留一个核心视觉和一条清晰路径。
-                  真正的细节，留给测试过程和人格结果。
+                  你的五维轮廓、相邻人格、精神状态和可转发海报都会一起给到，
+                  看完就知道你平时到底是哪路手法。
                 </p>
               </div>
             </div>
@@ -155,14 +157,14 @@ export default function Home() {
       <section className="px-5 py-16 md:px-8 md:py-20">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.78fr_1.22fr]">
           <div>
-            <span className="editorial-kicker">Five Models</span>
+            <span className="editorial-kicker">五个出手模型</span>
             <h2 className="display-font mt-5 text-4xl leading-tight text-black md:text-5xl">
-              测的不是会不会做图，
+              测的不是审美高低，
               <br />
-              是你在圈里的工作方式。
+              是你平时到底怎么接招。
             </h2>
             <p className="mt-5 max-w-md text-base leading-7 text-black/58">
-              五个模型就够解释大部分差异，不再额外堆很多过场信息。
+              不聊理想型，只拆你真上班时的默认动作、本能路数和救场习惯。
             </p>
           </div>
 
@@ -190,13 +192,15 @@ export default function Home() {
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
             <div>
-              <span className="editorial-kicker">Example Outcomes</span>
+              <span className="editorial-kicker">样本人格</span>
               <h2 className="display-font mt-5 text-4xl leading-tight text-black md:text-5xl">
-                不是只有一种画风能赢。
+                同一组需求，
+                <br />
+                大家的出手路数完全不是一回事。
               </h2>
             </div>
             <Link href="/types" className="ghost-button w-fit">
-              打开全部人格
+              打开全部档案
             </Link>
           </div>
 
@@ -235,7 +239,7 @@ export default function Home() {
         <div className="mx-auto max-w-7xl border-t border-black/10 pt-10">
           <div className="grid gap-8 lg:grid-cols-[1.08fr_0.92fr]">
             <div>
-              <span className="editorial-kicker">Ready</span>
+              <span className="editorial-kicker">准备开测</span>
               <h2 className="display-font mt-5 max-w-3xl text-4xl leading-tight text-black md:text-6xl">
                 {SITE_HOOK}
               </h2>
@@ -243,14 +247,14 @@ export default function Home() {
 
             <div className="flex flex-col items-start justify-between gap-6 lg:items-end">
               <p className="max-w-md text-sm leading-7 text-black/56 lg:text-right">
-                首页现在只负责让你理解产品，真正的内容密度留给测试页和结果页。
+                首页先把玩法讲明白，真正的黑话密度和人格开盒都在后面。
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link href="/test" className="primary-button">
-                  现在开始
+                  直接去测
                 </Link>
                 <Link href="/types" className="ghost-button">
-                  先看图鉴
+                  先翻图鉴
                 </Link>
               </div>
             </div>

@@ -114,7 +114,7 @@ export default function TestPage() {
             {SITE_NAME}
           </span>
           <span className="font-mono text-xs text-black/42">
-            {phase === "main" ? `${currentIndex + 1}/${total}` : "BONUS"}
+            {phase === "main" ? `${currentIndex + 1}/${total}` : "隐藏题"}
           </span>
         </div>
       </header>
@@ -130,12 +130,12 @@ export default function TestPage() {
               />
               <div>
                 <div className="font-mono text-xs font-black tracking-[0.24em] text-black/42">
-                  {phase === "main" ? currentDimension?.modelName : "隐藏鉴定"}
+                  {phase === "main" ? currentDimension?.modelName : "隐藏款鉴定"}
                 </div>
                 <h2 className="display-font mt-2 text-3xl leading-tight text-black">
                   {phase === "main"
                     ? currentDimension?.name ?? "继续答题"
-                    : "最后的彩蛋判断"}
+                    : "最后一道隐藏筛查"}
                 </h2>
               </div>
             </div>
@@ -143,7 +143,8 @@ export default function TestPage() {
             {phase === "main" && currentDimension && (
               <>
                 <p className="mt-6 text-sm leading-7 text-black/56">
-                  这里测的不是理想人设，而是你平时做站酷封面、小红书首图、脉脉求生和大厂过会时的真实反应。
+                  这里不测理想型，只看你一开工就会下意识走哪套路:
+                  先起版、先保交付、先翻人话，还是先把气质拉满。
                 </p>
                 <div className="mt-6 space-y-4 border-t border-black/10 pt-6 text-sm leading-7 text-black/58">
                   <div>
@@ -160,20 +161,20 @@ export default function TestPage() {
 
             {phase !== "main" && (
               <p className="mt-6 text-sm leading-7 text-black/56">
-                彩蛋题不影响主维度，但会决定你能不能解锁隐藏人格。认真一点，
-                说不定你就是设计组里那个自带色值面板的人。
+                彩蛋题不改主结果，只看你有没有隐藏款。认真一点，
+                说不定你就是设计组里那个自带色值雷达的人。
               </p>
             )}
 
             <div className="mt-8 flex flex-wrap gap-2">
               <span className="metric-pill">{answered} 题已答</span>
-              <span className="metric-pill">{phase === "main" ? `${progress}% 完成` : "彩蛋阶段"}</span>
+              <span className="metric-pill">{phase === "main" ? `${progress}% 完成` : "隐藏筛查"}</span>
             </div>
 
             <div className="mt-8 border-t border-black/10 pt-6">
               <div className="mb-3 flex items-center justify-between">
                 <span className="font-mono text-xs font-black tracking-[0.2em] text-black/38">
-                  ANSWER MAP
+                  答题轨迹
                 </span>
                 <span className="text-xs text-black/40">{answered}/{total}</span>
               </div>
@@ -218,7 +219,7 @@ export default function TestPage() {
                   </span>
                 </div>
                 <div className="font-mono text-xs font-black tracking-[0.24em] text-black/34">
-                  ANSWER WITH YOUR REAL WORKFLOW
+                  按你平时那套出手
                 </div>
               </div>
 
@@ -227,7 +228,7 @@ export default function TestPage() {
                   {currentQuestion.text}
                 </h1>
                 <p className="mt-5 max-w-2xl text-sm leading-7 text-black/54 md:text-base">
-                  别按“我希望自己是什么样”来答，按你真实上班时最常用的那套习惯来答。
+                  别按你脑内最体面的版本答，按你真上班时最顺手、最常发生、最会脱口而出的那套答。
                 </p>
               </div>
 
@@ -253,10 +254,10 @@ export default function TestPage() {
                           </div>
                           <div className="mt-2 text-sm text-black/42">
                             {index === 0
-                              ? "偏保守 / 偏省事 / 偏先过"
+                              ? "先苟住 / 先过版 / 先别炸"
                               : index === 1
-                                ? "偏中间 / 偏平衡 / 偏先保主线"
-                                : "偏极致 / 偏较真 / 偏一定要收口"}
+                                ? "正常出手 / 先保主线 / 稳住推进"
+                                : "上强度 / 要收口 / 不想留后患"}
                           </div>
                         </div>
                       </div>
@@ -273,7 +274,7 @@ export default function TestPage() {
                 >
                   ← 上一题
                 </button>
-                <span className="text-sm text-black/38">按你平时的真实黑话状态作答</span>
+                <span className="text-sm text-black/38">别端着，按你默认出手答</span>
               </div>
             </div>
           )}
@@ -282,7 +283,7 @@ export default function TestPage() {
             <div className="fade-in">
               <div className="border-b border-black/10 pb-5">
                 <div className="font-mono text-xs font-black tracking-[0.24em] text-black/38">
-                  BONUS / HIDDEN PERSONALITY CHECK
+                  BONUS / 隐藏款筛查
                 </div>
               </div>
 
@@ -291,7 +292,7 @@ export default function TestPage() {
                   {bonusQuestion.text}
                 </h1>
                 <p className="mt-5 max-w-2xl text-sm leading-7 text-black/54 md:text-base">
-                  彩蛋只负责判断你有没有隐藏人格，不影响前面的十五维主结果。
+                  这两题只看你有没有隐藏款，不改前面十五维的主结果。
                 </p>
               </div>
 
