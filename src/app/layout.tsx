@@ -6,6 +6,11 @@
  */
 
 import type { Metadata } from "next";
+import {
+  Cormorant_Garamond,
+  IBM_Plex_Mono,
+  Manrope,
+} from "next/font/google";
 import "./globals.css";
 import {
   AUTHOR_NAME,
@@ -16,6 +21,26 @@ import {
   SITE_NAME,
   SITE_DESCRIPTION,
 } from "@/lib/constants";
+
+const bodyFont = Manrope({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+});
+
+const displayFont = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const codeFont = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-code",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   applicationName: SITE_NAME,
@@ -46,7 +71,10 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="zh-CN" className="antialiased">
+    <html
+      lang="zh-CN"
+      className={`${bodyFont.variable} ${displayFont.variable} ${codeFont.variable} antialiased`}
+    >
       <body className="min-h-screen">{children}</body>
     </html>
   );
