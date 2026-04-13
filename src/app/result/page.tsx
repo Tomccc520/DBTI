@@ -24,11 +24,11 @@ import {
 import { calculateResult, type TestResult } from "@/lib/scoring";
 
 const modelInfo: Record<string, { icon: string; name: string }> = {
-  V: { icon: "✦", name: "视觉信仰" },
-  R: { icon: "△", name: "需求应对" },
-  C: { icon: "◎", name: "协作关系" },
-  I: { icon: "◆", name: "创意驱动" },
-  T: { icon: "▣", name: "工具共生" },
+  V: { icon: "✦", name: "像素结界" },
+  R: { icon: "△", name: "改稿渡劫" },
+  C: { icon: "◎", name: "嘴替战力" },
+  I: { icon: "◆", name: "灵感上头" },
+  T: { icon: "▣", name: "外挂共生" },
 };
 
 /**
@@ -214,7 +214,7 @@ export default function ResultPage() {
       ctx.fillText(`${result.similarity}%`, px(60), px(700));
       ctx.fillStyle = "rgba(16, 17, 22, 0.42)";
       ctx.font = `${px(18)}px Avenir Next, sans-serif`;
-      ctx.fillText("人格匹配度", px(60), px(732));
+      ctx.fillText("贴脸程度", px(60), px(732));
 
       ctx.strokeStyle = "rgba(16, 17, 22, 0.12)";
       ctx.lineWidth = px(2);
@@ -269,7 +269,7 @@ export default function ResultPage() {
 
       ctx.fillStyle = "#101116";
       ctx.font = `700 ${px(24)}px Avenir Next, sans-serif`;
-      ctx.fillText("你是什么类型的设计师？", px(228), px(1188));
+      ctx.fillText("测测你在设计圈到底是哪挂", px(228), px(1188));
       ctx.fillStyle = personality.color;
       ctx.font = `800 ${px(20)}px Avenir Next, sans-serif`;
       ctx.fillText("扫码继续测试", px(228), px(1232));
@@ -293,14 +293,20 @@ export default function ResultPage() {
       <div className="flex min-h-screen items-center justify-center">
         <div className="surface-panel rounded-[30px] px-8 py-7 text-center">
           <div className="mx-auto h-12 w-12 animate-spin rounded-full border-4 border-black/16 border-t-black/70" />
-          <p className="mt-4 text-sm text-black/56">正在编译你的设计人格...</p>
+          <p className="mt-4 text-sm text-black/56">正在给你的设计画风开号...</p>
         </div>
       </div>
     );
   }
 
   const { personality, similarity, dimensions, matchDetails } = result;
-  const shareText = `我在 ${SITE_NAME} ${SITE_FULL_NAME} 中测出了【${personality.code} · ${personality.name}】\n「${personality.motto}」\n匹配度 ${similarity}%\n\n来测测你是哪一型设计师 👉 ${getSiteUrl()}`;
+  const groupedModels = ["V", "R", "C", "I", "T"].map((model) => ({
+    model,
+    info: modelInfo[model],
+    items: dimensions.filter((item) => item.model === model),
+  }));
+  const topMatches = matchDetails.slice(0, 3);
+  const shareText = `我在 ${SITE_NAME} ${SITE_FULL_NAME} 里被鉴定成【${personality.code} · ${personality.name}】\n「${personality.motto}」\n贴脸程度 ${similarity}%\n\n来测测你到底更像站酷封面脑、小红书种草体、脉脉求生派，还是大厂过会王 👉 ${getSiteUrl()}`;
 
   /**
    * 复制分享文案到剪贴板。
@@ -336,189 +342,225 @@ export default function ResultPage() {
     <main className="min-h-screen">
       <div className="grain-overlay" />
 
-      <header className="sticky top-0 z-40 border-b border-black/8 bg-[#f7f2eb]/88 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 md:px-8">
+      <header className="sticky top-0 z-40 border-b border-black/10 bg-[#f4ede4]/82 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-8">
           <button
             onClick={() => router.push("/")}
             className="text-sm text-black/52 transition hover:text-black"
           >
             ← 首页
           </button>
-          <span className="font-mono text-sm font-black tracking-[0.3em] text-black/82">
+          <span className="font-mono text-sm font-black tracking-[0.32em] text-black/82">
             {SITE_NAME}
           </span>
-          <span className="font-mono text-xs text-black/44">RESULT</span>
+          <span className="font-mono text-xs text-black/42">RESULT</span>
         </div>
       </header>
 
-      <div className="mx-auto max-w-6xl px-5 py-8 md:px-8">
-        <div className="grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
-          <section className="surface-panel-strong rounded-[34px] p-6 md:p-8">
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="editorial-kicker">Best Match</span>
-              {result.isSpecial && (
-                <span className="metric-pill" style={{ color: personality.color }}>
-                  隐藏人格已触发
-                </span>
-              )}
-            </div>
-
-            <div className="mt-7 grid items-center gap-6 md:grid-cols-[220px_1fr]">
-              <CharacterSVG
-                type={personality.code}
-                accent={personality.color}
-                size={220}
-                className="mx-auto float-animation"
-              />
-              <div>
-                <div
-                  className="font-mono text-4xl font-black tracking-[0.18em] md:text-6xl"
-                  style={{ color: personality.color }}
-                >
-                  {personality.code}
-                </div>
-                <h1 className="display-font mt-3 text-4xl leading-tight text-black md:text-5xl">
-                  {personality.name}
-                </h1>
-                <p className="mt-3 text-base italic text-black/56">
-                  「{personality.motto}」
-                </p>
-                <div className="mt-5 flex flex-wrap gap-3">
-                  <span className="metric-pill">
-                    匹配度
-                    <strong
-                      className="font-mono text-lg font-black"
-                      style={{ color: personality.color }}
-                    >
-                      {similarity}%
-                    </strong>
+      <section className="border-b border-black/10 px-5 py-8 md:px-8 md:py-10">
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.94fr_1.06fr]">
+          <div className="result-stage">
+            <div className="result-stage-glow" style={{ backgroundColor: personality.color }} />
+            <div className="relative z-10">
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="editorial-kicker">Best Match</span>
+                {result.isSpecial && (
+                  <span className="metric-pill" style={{ color: personality.color }}>
+                    隐藏人格已触发
                   </span>
-                  <span className="metric-pill">15 维已分析</span>
+                )}
+              </div>
+
+              <div className="mt-8 grid gap-8 xl:grid-cols-[1fr_260px]">
+                <div>
+                  <div
+                    className="font-mono text-5xl font-black tracking-[0.18em] md:text-8xl"
+                    style={{ color: personality.color }}
+                  >
+                    {personality.code}
+                  </div>
+                  <h1 className="display-font mt-4 text-4xl leading-tight text-black md:text-6xl">
+                    {personality.name}
+                  </h1>
+                  <p className="mt-4 text-base italic text-black/56 md:text-lg">
+                    「{personality.motto}」
+                  </p>
+                  <p className="mt-6 max-w-2xl text-sm leading-8 text-black/62 md:text-base">
+                    {personality.description}
+                  </p>
+
+                  <div className="mt-8 flex flex-wrap gap-3">
+                    <span className="metric-pill">
+                      贴脸程度
+                      <strong
+                        className="font-mono text-lg font-black"
+                        style={{ color: personality.color }}
+                      >
+                        {similarity}%
+                      </strong>
+                    </span>
+                    <span className="metric-pill">15 维已分析</span>
+                    <span className="metric-pill">圈层黑话已翻译</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-center">
+                  <CharacterSVG
+                    type={personality.code}
+                    accent={personality.color}
+                    size={240}
+                    className="float-animation"
+                  />
                 </div>
               </div>
             </div>
+          </div>
 
-            <p className="mt-7 text-sm leading-7 text-black/64 md:text-base">
-              {personality.description}
-            </p>
-          </section>
+          <div className="space-y-8">
+            <section className="border-b border-black/10 pb-8">
+              <div className="flex items-center justify-between">
+                <span className="editorial-kicker">Model Snapshot</span>
+                <span className="text-sm text-black/42">五维轮廓</span>
+              </div>
+              <div className="mt-6 flex justify-center lg:justify-start">
+                <RadarChart dimensions={dimensions} size={320} />
+              </div>
+            </section>
 
-          <section className="surface-panel rounded-[34px] p-6 md:p-8">
-            <div className="flex items-center justify-between">
-              <span className="editorial-kicker">Model Snapshot</span>
-              <span className="text-sm text-black/46">五维轮廓</span>
-            </div>
-            <div className="mt-6 flex justify-center">
-              <RadarChart dimensions={dimensions} size={320} />
-            </div>
-
-            {matchDetails.length > 0 && (
-              <div className="mt-6 border-t border-black/8 pt-6">
-                <div className="mb-4 text-sm font-semibold text-black/72">
-                  相近人格排行
+            {topMatches.length > 0 && (
+              <section>
+                <div className="mb-4 font-mono text-xs font-black tracking-[0.24em] text-black/38">
+                  CLOSEST NEIGHBORS
                 </div>
-                <div className="space-y-3">
-                  {matchDetails.map((item, index) => (
-                    <div key={item.code} className="flex items-center gap-3">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-xs font-black text-white">
-                        {index + 1}
+                <div className="border-t border-black/10">
+                  {topMatches.map((item, index) => (
+                    <div key={item.code} className="ledger-row">
+                      <div className="font-mono text-sm font-black text-black/42">
+                        0{index + 1}
                       </div>
-                      <div className="min-w-0 flex-1">
-                        <div className="font-mono text-sm font-bold text-black/86">
+                      <div>
+                        <div className="font-mono text-sm font-black text-black/84">
                           {item.code}
                         </div>
-                        <div className="text-xs text-black/48">{item.name}</div>
+                        <div className="mt-1 text-sm text-black/48">{item.name}</div>
                       </div>
-                      <div className="h-2 flex-1 overflow-hidden rounded-full bg-black/8">
-                        <div
-                          className="h-full rounded-full"
-                          style={{
-                            width: `${item.similarity}%`,
-                            background: `linear-gradient(90deg, ${personality.color}, #2f6bff)`,
-                          }}
-                        />
-                      </div>
-                      <div className="w-10 text-right font-mono text-xs text-black/48">
+                      <div className="justify-self-end font-mono text-sm text-black/52">
                         {item.similarity}%
                       </div>
                     </div>
                   ))}
                 </div>
-              </div>
+              </section>
             )}
-          </section>
+          </div>
         </div>
+      </section>
 
-        <div className="mt-6 grid gap-6 xl:grid-cols-[0.88fr_1.12fr]">
-          <section className="surface-panel rounded-[34px] p-6 md:p-8">
+      <div className="mx-auto max-w-7xl px-5 py-10 md:px-8">
+        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+          <section>
             <span className="editorial-kicker">Traits</span>
-            <div className="mt-6 grid gap-4 md:grid-cols-2">
-              <div className="rounded-[26px] border border-black/8 bg-white/58 p-5">
-                <div className="text-sm font-semibold text-black/82">优势</div>
-                <ul className="mt-4 space-y-2 text-sm leading-6 text-black/62">
+            <div className="mt-6 border-t border-black/10">
+              <div className="ledger-row">
+                <div className="font-semibold text-black/86">优势</div>
+                <div className="col-span-2 flex flex-wrap gap-2">
                   {personality.strengths.map((item) => (
-                    <li key={item}>· {item}</li>
+                    <span key={item} className="metric-pill">
+                      {item}
+                    </span>
                   ))}
-                </ul>
+                </div>
               </div>
-              <div className="rounded-[26px] border border-black/8 bg-white/58 p-5">
-                <div className="text-sm font-semibold text-black/82">注意</div>
-                <ul className="mt-4 space-y-2 text-sm leading-6 text-black/62">
+              <div className="ledger-row">
+                <div className="font-semibold text-black/86">注意</div>
+                <div className="col-span-2 flex flex-wrap gap-2">
                   {personality.weaknesses.map((item) => (
-                    <li key={item}>· {item}</li>
+                    <span key={item} className="metric-pill">
+                      {item}
+                    </span>
                   ))}
-                </ul>
+                </div>
+              </div>
+              <div className="ledger-row">
+                <div className="font-semibold text-black/86">工作流</div>
+                <div className="col-span-2 text-sm leading-7 text-black/58">
+                  {personality.techStack}
+                </div>
+              </div>
+              <div className="ledger-row">
+                <div className="font-semibold text-black/86">一句话</div>
+                <div className="col-span-2 text-sm italic leading-7 text-black/58">
+                  「{personality.spirit}」
+                </div>
               </div>
             </div>
 
-            <div className="mt-5 rounded-[26px] border border-black/8 bg-white/58 p-5">
-              <div className="text-sm font-semibold text-black/82">工作流关键词</div>
-              <p className="mt-2 text-sm leading-6 text-black/62">{personality.techStack}</p>
-              <div className="mt-4 text-sm font-semibold text-black/82">一句话人格</div>
-              <p className="mt-2 text-sm italic leading-6 text-black/62">
-                「{personality.spirit}」
+            <div className="mt-10 border-t border-black/10 pt-6">
+              <div className="mb-4 font-mono text-xs font-black tracking-[0.24em] text-black/38">
+                SHARE COPY
+              </div>
+              <p className="whitespace-pre-line text-sm leading-8 text-black/62">
+                {shareText}
               </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <button onClick={handleCopy} className="primary-button">
+                  {copied ? "已复制文案" : "复制分享文案"}
+                </button>
+                <button
+                  onClick={posterUrl ? handleSavePoster : generatePoster}
+                  className="ghost-button"
+                >
+                  {generatingPoster ? "海报生成中..." : posterUrl ? "保存海报" : "生成海报"}
+                </button>
+              </div>
+
+              {posterUrl && (
+                <div className="mt-6 fade-in">
+                  <p className="mb-3 text-sm text-black/44">长按或下载保存这张海报</p>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={posterUrl}
+                    alt="设计师人格测试分享海报"
+                    className="w-full max-w-[360px] rounded-[30px] border border-black/10 shadow-[0_26px_56px_rgba(16,17,22,0.12)]"
+                  />
+                </div>
+              )}
             </div>
           </section>
 
-          <section className="surface-panel rounded-[34px] p-6 md:p-8">
+          <section>
             <button
               onClick={() => setShowDetails((current) => !current)}
-              className="flex w-full items-center justify-between"
+              className="flex w-full items-center justify-between border-b border-black/10 pb-5 text-left"
             >
               <div>
                 <span className="editorial-kicker">Dimension Details</span>
-                <h2 className="display-font mt-3 text-3xl leading-tight text-black">
-                  十五维度详细解读
+                <h2 className="display-font mt-4 text-4xl leading-tight text-black">
+                  十五维黑话拆解
                 </h2>
               </div>
-              <span className="text-sm text-black/42">
-                {showDetails ? "收起" : "展开"}
-              </span>
+              <span className="text-sm text-black/42">{showDetails ? "收起" : "展开"}</span>
             </button>
 
             {showDetails && (
-              <div className="mt-6 space-y-7 fade-in">
-                {["V", "R", "C", "I", "T"].map((model) => {
-                  const grouped = dimensions.filter((item) => item.model === model);
-                  return (
-                    <div key={model}>
-                      <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-black/76">
-                        <span>{modelInfo[model].icon}</span>
-                        <span>{modelInfo[model].name}</span>
-                      </div>
-                      <div className="space-y-3">
-                        {grouped.map((dimension) => (
-                          <div key={dimension.code} className="rounded-[22px] border border-black/8 bg-white/56 p-4">
-                            <div className="mb-2 flex items-center justify-between">
-                              <span className="text-sm font-medium text-black/74">
-                                {dimension.code} · {dimension.name}
-                              </span>
-                              <span className="font-mono text-xs text-black/48">
-                                {dimension.level}
-                              </span>
+              <div className="mt-6 space-y-8 fade-in">
+                {groupedModels.map(({ model, info, items }) => (
+                  <div key={model}>
+                    <div className="mb-4 flex items-center gap-2 text-sm font-semibold text-black/74">
+                      <span>{info.icon}</span>
+                      <span>{info.name}</span>
+                    </div>
+                    <div className="border-t border-black/10">
+                      {items.map((dimension) => (
+                        <div key={dimension.code} className="ledger-row">
+                          <div className="font-mono text-sm font-black text-black/42">
+                            {dimension.code}
+                          </div>
+                          <div>
+                            <div className="text-sm font-semibold text-black/84">
+                              {dimension.name}
                             </div>
-                            <div className="h-2 overflow-hidden rounded-full bg-black/8">
+                            <div className="mt-2 h-2 overflow-hidden rounded-full bg-black/8">
                               <div
                                 className="h-full rounded-full"
                                 style={{
@@ -528,63 +570,26 @@ export default function ResultPage() {
                               />
                             </div>
                           </div>
-                        ))}
-                      </div>
+                          <div className="justify-self-end font-mono text-sm text-black/52">
+                            {dimension.level} / {dimension.percentage}%
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                  );
-                })}
+                  </div>
+                ))}
               </div>
             )}
           </section>
         </div>
 
-        <section className="surface-panel-strong mt-6 rounded-[34px] p-6 md:p-8">
-          <span className="editorial-kicker">Share</span>
-          <h2 className="display-font mt-4 text-3xl leading-tight text-black md:text-4xl">
-            把你的设计人格发出去。
-          </h2>
-          <p className="mt-3 text-sm leading-6 text-black/58">
-            可以直接复制文案，也可以生成一张长图海报。海报里的二维码会自动指向当前站点地址。
-          </p>
-
-          <div className="mt-6 rounded-[28px] border border-black/8 bg-white/58 p-5">
-            <p className="whitespace-pre-line text-sm leading-7 text-black/72">
-              {shareText}
-            </p>
-          </div>
-
-          <div className="mt-5 flex flex-wrap gap-3">
-            <button onClick={handleCopy} className="primary-button">
-              {copied ? "已复制文案" : "复制分享文案"}
-            </button>
-            <button
-              onClick={posterUrl ? handleSavePoster : generatePoster}
-              className="secondary-button"
-            >
-              {generatingPoster ? "海报生成中..." : posterUrl ? "保存海报" : "生成海报"}
-            </button>
-          </div>
-
-          {posterUrl && (
-            <div className="mt-6 fade-in">
-              <p className="mb-3 text-sm text-black/48">长按或下载保存这张海报</p>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={posterUrl}
-                alt="设计师人格测试分享海报"
-                className="w-full max-w-[360px] rounded-[28px] border border-black/8 shadow-[0_24px_60px_rgba(16,17,22,0.12)]"
-              />
-            </div>
-          )}
-        </section>
-
-        <div className="mt-6 flex flex-wrap gap-3">
+        <div className="mt-12 flex flex-wrap gap-3 border-t border-black/10 pt-6">
           <button
             onClick={() => {
               sessionStorage.removeItem("dbti_data");
               router.push("/test");
             }}
-            className="secondary-button"
+            className="ghost-button"
           >
             重新测试
           </button>
@@ -593,7 +598,7 @@ export default function ResultPage() {
           </button>
         </div>
 
-        <footer className="mt-10 flex flex-col gap-3 border-t border-black/10 pt-6 pb-8 text-sm text-black/48 md:flex-row md:items-center md:justify-between">
+        <footer className="mt-12 flex flex-col gap-3 border-t border-black/10 pt-6 pb-8 text-sm text-black/48 md:flex-row md:items-center md:justify-between">
           <p>
             {SITE_NAME} · {SITE_FULL_NAME}
           </p>

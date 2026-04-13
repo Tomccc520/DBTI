@@ -1,6 +1,6 @@
 {
   "name": "dbti",
-  "description": "30 道题，从 5 大模型、15 个维度测出你的设计人格。",
+  "description": "30 道题，测测你到底是站酷封面脑、小红书种草体、脉脉求生派，还是大厂过会王。",
   "version": "0.1.0",
   "private": true,
   "scripts": {

@@ -43,7 +43,9 @@ export default function TestPage() {
   const currentDimension = dimensionDefs.find(
     (definition) => definition.code === currentQuestion?.dimension
   );
-  const accent = currentDimension ? modelAccent[currentDimension.model] : "#111827";
+  const bonusQuestion =
+    phase === "hidden1" ? hiddenQuestions[0] : phase === "hidden2" ? hiddenQuestions[1] : null;
+  const accent = currentDimension ? modelAccent[currentDimension.model] : "#101116";
 
   /**
    * 处理主问题答案并推进到下一题。
@@ -100,128 +102,170 @@ export default function TestPage() {
     <main className="min-h-screen">
       <div className="grain-overlay" />
 
-      <header className="sticky top-0 z-40 border-b border-black/8 bg-[#f7f2eb]/88 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 md:px-8">
+      <header className="sticky top-0 z-40 border-b border-black/10 bg-[#f4ede4]/82 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-8">
           <button
             onClick={() => router.push("/")}
             className="text-sm text-black/52 transition hover:text-black"
           >
             ← 首页
           </button>
-          <span className="font-mono text-sm font-black tracking-[0.3em] text-black/82">
+          <span className="font-mono text-sm font-black tracking-[0.32em] text-black/82">
             {SITE_NAME}
           </span>
-          <span className="font-mono text-xs text-black/44">
+          <span className="font-mono text-xs text-black/42">
             {phase === "main" ? `${currentIndex + 1}/${total}` : "BONUS"}
           </span>
         </div>
-        <div className="h-[2px] bg-black/6">
-          <div
-            className="progress-bar h-full bg-gradient-to-r from-[#ff6b2c] via-[#2f6bff] to-[#00a68c]"
-            style={{ width: `${phase === "main" ? progress : 100}%` }}
-          />
-        </div>
       </header>
 
-      <div className="mx-auto grid max-w-6xl gap-6 px-5 py-8 md:px-8 lg:grid-cols-[0.76fr_1fr]">
-        <aside className="surface-panel sticky top-24 h-fit rounded-[30px] p-6">
-          <div className="flex items-center gap-4">
-            <CharacterSVG
-              type={phase === "main" ? currentQuestion?.dimension ?? "DBTI" : "BONUS"}
-              size={96}
-              accent={accent}
-            />
-            <div>
-              <span className="editorial-kicker">
-                {phase === "main" ? currentDimension?.modelName : "彩蛋题"}
-              </span>
-              <h2 className="display-font mt-3 text-3xl leading-tight text-black">
-                {phase === "main"
-                  ? currentDimension?.name ?? "继续答题"
-                  : "最后的隐藏校验"}
-              </h2>
-            </div>
-          </div>
-
-          {phase === "main" && currentDimension && (
-            <>
-              <p className="mt-5 text-sm leading-6 text-black/58">
-                当前题目在测你对「{currentDimension.name}」的真实偏向。别按理想人格答，
-                按你平时上班最常见的状态答，结果会更准。
-              </p>
-              <div className="mt-6 space-y-3 text-sm leading-6 text-black/56">
-                <div className="rounded-[22px] border border-black/8 bg-white/58 p-4">
-                  <div className="font-semibold text-black/82">低位状态 L</div>
-                  <p className="mt-1">{currentDimension.levels.L}</p>
+      <div className="mx-auto grid max-w-7xl gap-0 px-5 md:px-8 lg:grid-cols-[320px_1fr]">
+        <aside className="workspace-sidebar lg:min-h-[calc(100svh-73px)]">
+          <div className="sticky top-[73px] px-0 py-8 lg:px-0">
+            <div className="flex items-center gap-4">
+              <CharacterSVG
+                type={phase === "main" ? currentQuestion?.dimension ?? "DBTI" : "BONUS"}
+                size={88}
+                accent={accent}
+              />
+              <div>
+                <div className="font-mono text-xs font-black tracking-[0.24em] text-black/42">
+                  {phase === "main" ? currentDimension?.modelName : "隐藏鉴定"}
                 </div>
-                <div className="rounded-[22px] border border-black/8 bg-white/58 p-4">
-                  <div className="font-semibold text-black/82">高位状态 H</div>
-                  <p className="mt-1">{currentDimension.levels.H}</p>
-                </div>
+                <h2 className="display-font mt-2 text-3xl leading-tight text-black">
+                  {phase === "main"
+                    ? currentDimension?.name ?? "继续答题"
+                    : "最后的彩蛋判断"}
+                </h2>
               </div>
-            </>
-          )}
+            </div>
 
-          {phase !== "main" && (
-            <p className="mt-5 text-sm leading-6 text-black/58">
-              彩蛋题不影响主维度分数，但会决定你能不能触发隐藏人格。认真一点，
-              也许你就是那类能直接看出色号的人。
-            </p>
-          )}
+            {phase === "main" && currentDimension && (
+              <>
+                <p className="mt-6 text-sm leading-7 text-black/56">
+                  这里测的不是理想人设，而是你平时做站酷封面、小红书首图、脉脉求生和大厂过会时的真实反应。
+                </p>
+                <div className="mt-6 space-y-4 border-t border-black/10 pt-6 text-sm leading-7 text-black/58">
+                  <div>
+                    <div className="font-semibold text-black/82">低位状态</div>
+                    <p className="mt-1">{currentDimension.levels.L}</p>
+                  </div>
+                  <div>
+                    <div className="font-semibold text-black/82">高位状态</div>
+                    <p className="mt-1">{currentDimension.levels.H}</p>
+                  </div>
+                </div>
+              </>
+            )}
 
-          <div className="mt-6 flex flex-wrap gap-2">
-            <span className="metric-pill">{answered} 题已答</span>
-            <span className="metric-pill">{progress}% 完成</span>
+            {phase !== "main" && (
+              <p className="mt-6 text-sm leading-7 text-black/56">
+                彩蛋题不影响主维度，但会决定你能不能解锁隐藏人格。认真一点，
+                说不定你就是设计组里那个自带色值面板的人。
+              </p>
+            )}
+
+            <div className="mt-8 flex flex-wrap gap-2">
+              <span className="metric-pill">{answered} 题已答</span>
+              <span className="metric-pill">{phase === "main" ? `${progress}% 完成` : "彩蛋阶段"}</span>
+            </div>
+
+            <div className="mt-8 border-t border-black/10 pt-6">
+              <div className="mb-3 flex items-center justify-between">
+                <span className="font-mono text-xs font-black tracking-[0.2em] text-black/38">
+                  ANSWER MAP
+                </span>
+                <span className="text-xs text-black/40">{answered}/{total}</span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {questions.map((question, index) => {
+                  const done = question.id in answers;
+                  const isCurrent = index === currentIndex;
+                  return (
+                    <button
+                      key={question.id}
+                      onClick={() => (done || isCurrent) && setCurrentIndex(index)}
+                      className={`h-9 w-9 rounded-full border text-xs font-black transition ${
+                        isCurrent
+                          ? "border-black bg-black text-white"
+                          : done
+                            ? "border-black/12 bg-white text-black/72"
+                            : "border-transparent bg-black/6 text-black/34"
+                      }`}
+                    >
+                      {question.id}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </aside>
 
-        <section className="surface-panel-strong rounded-[32px] p-6 md:p-8">
-          {phase === "main" && currentQuestion && (
+        <section className="workspace-stage">
+          {phase === "main" && currentQuestion && currentDimension && (
             <div className="fade-in">
-              <div className="flex flex-wrap items-center gap-3">
-                <span
-                  className="rounded-full px-3 py-1 font-mono text-xs font-black tracking-[0.18em] text-white"
-                  style={{ backgroundColor: accent }}
-                >
-                  Q{currentQuestion.id}
-                </span>
-                <span className="text-sm text-black/48">
-                  {currentDimension?.modelName} · {currentQuestion.dimension}
-                </span>
+              <div className="flex flex-wrap items-center justify-between gap-4 border-b border-black/10 pb-5">
+                <div className="flex flex-wrap items-center gap-3">
+                  <span
+                    className="rounded-full px-3 py-1 font-mono text-xs font-black tracking-[0.18em] text-white"
+                    style={{ backgroundColor: accent }}
+                  >
+                    Q{currentQuestion.id}
+                  </span>
+                  <span className="text-sm text-black/46">
+                    {currentDimension.modelName} · {currentQuestion.dimension}
+                  </span>
+                </div>
+                <div className="font-mono text-xs font-black tracking-[0.24em] text-black/34">
+                  ANSWER WITH YOUR REAL WORKFLOW
+                </div>
               </div>
 
-              <h1 className="display-font mt-6 text-4xl leading-tight text-black md:text-5xl">
-                {currentQuestion.text}
-              </h1>
+              <div className="mt-10 max-w-4xl">
+                <h1 className="display-font text-4xl leading-tight text-black md:text-6xl md:leading-[1.02]">
+                  {currentQuestion.text}
+                </h1>
+                <p className="mt-5 max-w-2xl text-sm leading-7 text-black/54 md:text-base">
+                  别按“我希望自己是什么样”来答，按你真实上班时最常用的那套习惯来答。
+                </p>
+              </div>
 
-              <div className="mt-8 space-y-3">
+              <div className="mt-10 space-y-3">
                 {currentQuestion.options.map((option, index) => {
                   const active = answers[currentQuestion.id] === option.value;
                   return (
                     <button
                       key={option.label}
                       onClick={() => handleSelect(option.value)}
-                      className={`question-option w-full rounded-[24px] p-4 text-left md:p-5 ${
-                        active ? "selected" : ""
-                      }`}
+                      className={`workspace-option ${active ? "selected" : ""}`}
                     >
-                      <div className="flex items-start gap-4">
+                      <div className="flex items-start gap-5">
                         <div
-                          className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full text-sm font-black text-white"
-                          style={{ backgroundColor: active ? accent : "#111827" }}
+                          className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full text-sm font-black text-white"
+                          style={{ backgroundColor: active ? accent : "#101116" }}
                         >
                           {String.fromCharCode(65 + index)}
                         </div>
-                        <span className="text-sm leading-7 text-black/76 md:text-base">
-                          {option.label}
-                        </span>
+                        <div className="min-w-0 flex-1">
+                          <div className="text-lg font-semibold text-black/88 md:text-xl">
+                            {option.label}
+                          </div>
+                          <div className="mt-2 text-sm text-black/42">
+                            {index === 0
+                              ? "偏保守 / 偏省事 / 偏先过"
+                              : index === 1
+                                ? "偏中间 / 偏平衡 / 偏先保主线"
+                                : "偏极致 / 偏较真 / 偏一定要收口"}
+                          </div>
+                        </div>
                       </div>
                     </button>
                   );
                 })}
               </div>
 
-              <div className="mt-8 flex items-center justify-between">
+              <div className="mt-10 flex items-center justify-between border-t border-black/10 pt-5">
                 <button
                   onClick={() => currentIndex > 0 && setCurrentIndex(currentIndex - 1)}
                   disabled={currentIndex === 0}
@@ -229,88 +273,46 @@ export default function TestPage() {
                 >
                   ← 上一题
                 </button>
-                <span className="text-sm text-black/40">按你的真实习惯作答</span>
-              </div>
-
-              <div className="mt-8 border-t border-black/8 pt-6">
-                <div className="mb-3 flex items-center justify-between">
-                  <span className="font-mono text-xs tracking-[0.18em] text-black/42">
-                    ANSWER BOARD
-                  </span>
-                  <span className="text-xs text-black/42">
-                    {answered}/{total}
-                  </span>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {questions.map((question, index) => {
-                    const done = question.id in answers;
-                    const isCurrent = index === currentIndex;
-                    return (
-                      <button
-                        key={question.id}
-                        onClick={() => (done || isCurrent) && setCurrentIndex(index)}
-                        className={`h-8 w-8 rounded-full text-xs font-bold transition ${
-                          isCurrent
-                            ? "bg-black text-white"
-                            : done
-                              ? "bg-white text-black/76 border border-black/12"
-                              : "bg-black/6 text-black/36"
-                        }`}
-                      >
-                        {question.id}
-                      </button>
-                    );
-                  })}
-                </div>
+                <span className="text-sm text-black/38">按你平时的真实黑话状态作答</span>
               </div>
             </div>
           )}
 
-          {phase === "hidden1" && (
+          {phase !== "main" && bonusQuestion && (
             <div className="fade-in">
-              <span className="editorial-kicker">Hidden Check</span>
-              <h1 className="display-font mt-6 text-4xl leading-tight text-black md:text-5xl">
-                {hiddenQuestions[0].text}
-              </h1>
-              <p className="mt-4 max-w-xl text-sm leading-6 text-black/56">
-                主测试已经结束了，这里是额外的趣味识别。少数人会在这里触发隐藏人格。
-              </p>
-
-              <div className="mt-8 grid gap-3 md:grid-cols-2">
-                {hiddenQuestions[0].options.map((option) => (
-                  <button
-                    key={option.value}
-                    onClick={() => handleHidden1(option.value)}
-                    className="question-option rounded-[24px] p-5 text-left"
-                  >
-                    <div className="text-base font-semibold text-black/86">
-                      {option.label}
-                    </div>
-                  </button>
-                ))}
+              <div className="border-b border-black/10 pb-5">
+                <div className="font-mono text-xs font-black tracking-[0.24em] text-black/38">
+                  BONUS / HIDDEN PERSONALITY CHECK
+                </div>
               </div>
-            </div>
-          )}
 
-          {phase === "hidden2" && (
-            <div className="fade-in">
-              <span className="editorial-kicker">Pantone Gate</span>
-              <h1 className="display-font mt-6 text-4xl leading-tight text-black md:text-5xl">
-                {hiddenQuestions[1].text}
-              </h1>
-              <p className="mt-4 max-w-xl text-sm leading-6 text-black/56">
-                这是最后一道隐藏校验。如果你真的是色号型选手，结果页会给你特别身份。
-              </p>
+              <div className="mt-10 max-w-4xl">
+                <h1 className="display-font text-4xl leading-tight text-black md:text-6xl md:leading-[1.02]">
+                  {bonusQuestion.text}
+                </h1>
+                <p className="mt-5 max-w-2xl text-sm leading-7 text-black/54 md:text-base">
+                  彩蛋只负责判断你有没有隐藏人格，不影响前面的十五维主结果。
+                </p>
+              </div>
 
-              <div className="mt-8 space-y-3">
-                {hiddenQuestions[1].options.map((option) => (
+              <div className="mt-10 space-y-3">
+                {bonusQuestion.options.map((option, index) => (
                   <button
-                    key={option.value}
-                    onClick={() => handleHidden2(option.value)}
-                    className="question-option w-full rounded-[24px] p-5 text-left"
+                    key={option.label}
+                    onClick={() =>
+                      phase === "hidden1"
+                        ? handleHidden1(String(option.value))
+                        : handleHidden2(String(option.value))
+                    }
+                    className="workspace-option"
                   >
-                    <div className="text-base font-semibold text-black/86">
-                      {option.label}
+                    <div className="flex items-start gap-5">
+                      <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-black text-sm font-black text-white">
+                        {String.fromCharCode(65 + index)}
+                      </div>
+                      <div className="text-lg font-semibold text-black/88 md:text-xl">
+                        {option.label}
+                      </div>
                     </div>
                   </button>
                 ))}

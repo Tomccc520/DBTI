@@ -25,37 +25,62 @@ const featuredTypes = personalities.filter((item) =>
   featuredCodes.includes(item.code)
 );
 
-const stats = [
-  { value: "30", label: "道题" },
-  { value: "5", label: "个模型" },
-  { value: "27+1", label: "种人格" },
+const tickerItems = [
+  "站酷封面脑",
+  "小红书种草体",
+  "脉脉求生派",
+  "大厂过会王",
+  "像素结界",
+  "改稿渡劫",
+  "嘴替战力",
+  "灵感上头",
+  "外挂共生",
 ];
 
 const modelBlocks = [
   {
     code: "V",
-    title: "视觉信仰",
-    desc: "从像素敏感度、细节洁癖到系统一致性，测你对“美”和“准”的执念有多深。",
+    title: "像素结界",
+    desc: "对味雷达、细节内耗、统一执念，测你是不是那种 1px 歪了也会当场破防的人。",
   },
   {
     code: "R",
-    title: "需求应对",
-    desc: "面对改稿、死线和复盘，你究竟是平静处理，还是边做边渡劫。",
+    title: "改稿渡劫",
+    desc: "返工抗性、死线爆改、复盘补丁，看你是会瞬间下线，还是越到后面越能开大。",
   },
   {
     code: "C",
-    title: "协作关系",
-    desc: "看你如何讲设计、拉对齐、做提案，决定你在团队里是安静高手还是场控选手。",
+    title: "嘴替战力",
+    desc: "抽象黑话翻译、人话拉齐、过会说服力，决定你是安静高手还是评审场控人。",
   },
   {
     code: "I",
-    title: "创意驱动",
-    desc: "灵感从哪里来，敢不敢冒险，出手够不够快，都会决定你的设计气质。",
+    title: "灵感上头",
+    desc: "起稿点火、整活胆量、出片手速，测你到底偏稳派、狠派，还是纯靠灵感开挂。",
   },
   {
     code: "T",
-    title: "工具共生",
-    desc: "AI、Figma、变量、插件、工作流，你和工具之间到底是谁在驯谁。",
+    title: "外挂共生",
+    desc: "AI、Figma、变量、插件和新工作流，你和工具之间到底是谁在驯谁。",
+  },
+];
+
+const toneBlocks = [
+  {
+    title: "站酷语气",
+    desc: "更在乎封面张力、排版狠度和记忆点，主打一个先出片。",
+  },
+  {
+    title: "小红书语气",
+    desc: "更在乎氛围、情绪、种草感和那股让人想截图保存的劲儿。",
+  },
+  {
+    title: "脉脉语气",
+    desc: "更在乎打工人求生、背锅抗性、改稿耐受和能不能活着下班。",
+  },
+  {
+    title: "大厂设计组语气",
+    desc: "更在乎对齐、评审、过会、组件库和跨部门链路到底顺不顺。",
   },
 ];
 
@@ -67,18 +92,14 @@ export default function Home() {
     <main className="relative overflow-x-hidden">
       <div className="grain-overlay" />
 
-      <section className="paper-grid relative isolate min-h-screen overflow-hidden border-b border-black/8">
-        <div className="absolute -left-24 top-20 h-72 w-72 rounded-full bg-[#ff6b2c]/24 blur-3xl" />
-        <div className="absolute right-0 top-12 h-80 w-80 rounded-full bg-[#2f6bff]/16 blur-3xl" />
-        <div className="absolute bottom-10 right-1/4 h-72 w-72 rounded-full bg-[#00a68c]/14 blur-3xl" />
-
-        <header className="absolute inset-x-0 top-0 z-20">
-          <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-5 md:px-8">
-            <Link href="/" className="font-mono text-sm font-black tracking-[0.34em] text-black/80">
+      <section className="hero-poster relative min-h-[100svh] overflow-hidden border-b border-black/10">
+        <header className="absolute inset-x-0 top-0 z-30">
+          <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 md:px-8">
+            <Link href="/" className="font-mono text-sm font-black tracking-[0.34em] text-black/82">
               {SITE_NAME}
             </Link>
             <div className="flex items-center gap-3 text-sm text-black/60">
-              <Link href="/types" className="hidden md:inline-block hover:text-black/90">
+              <Link href="/types" className="hidden md:inline-block hover:text-black/92">
                 人格库
               </Link>
               <Link href="/test" className="secondary-button">
@@ -88,85 +109,92 @@ export default function Home() {
           </div>
         </header>
 
-        <div className="mx-auto grid min-h-screen max-w-6xl gap-10 px-5 pb-14 pt-28 md:px-8 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="flex flex-col justify-between gap-10">
-            <div className="slide-up">
-              <span className="editorial-kicker">{SITE_ENGLISH_NAME}</span>
-              <h1 className="display-font mt-5 text-[5rem] leading-none tracking-[-0.06em] text-black md:text-[7rem]">
-                {SITE_NAME}
-              </h1>
-              <p className="mt-3 text-xl font-semibold text-black/76 md:text-2xl">
-                {SITE_FULL_NAME}
-              </p>
-              <p className="mt-6 max-w-xl text-base leading-7 text-black/62 md:text-lg">
-                {SITE_TAGLINE} 通过 30 道和设计工作流相关的选择题，从视觉信仰、
-                需求应对、协作关系、创意驱动、工具共生五个角度，测出你的设计人格类型。
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Link href="/test" className="primary-button">
-                  开始测试
-                  <span className="font-mono text-base">↗</span>
-                </Link>
-                <Link href="/types" className="secondary-button">
-                  查看全部人格
-                </Link>
-              </div>
+        <div className="hero-glow hero-glow-left" />
+        <div className="hero-glow hero-glow-right" />
+
+        <div className="mx-auto grid min-h-[100svh] max-w-7xl items-end gap-10 px-5 pb-12 pt-28 md:px-8 lg:grid-cols-[0.94fr_1.06fr] lg:gap-14 lg:pb-16">
+          <div className="relative z-10 max-w-xl slide-up">
+            <span className="editorial-kicker">{SITE_ENGLISH_NAME}</span>
+            <p className="mt-6 font-mono text-xs font-black tracking-[0.32em] text-black/42">
+              DESIGNER BEHAVIOR TYPE INDICATOR
+            </p>
+            <h1 className="display-font mt-4 text-[4.8rem] leading-[0.92] tracking-[-0.07em] text-black md:text-[7.4rem]">
+              {SITE_NAME}
+            </h1>
+            <p className="mt-4 text-lg font-semibold text-black/74 md:text-2xl">
+              {SITE_FULL_NAME}
+            </p>
+            <p className="mt-6 text-base leading-8 text-black/64 md:text-lg">
+              {SITE_TAGLINE}
+            </p>
+            <p className="mt-4 max-w-lg text-sm leading-7 text-black/48 md:text-base">
+              把站酷、小红书、脉脉和大厂设计组的语气，混进 30 道题和 5 个抽象模型里，
+              测你在设计圈到底是哪种画风。
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/test" className="primary-button">
+                现在开测
+                <span className="font-mono text-base">↗</span>
+              </Link>
+              <Link href="/types" className="ghost-button">
+                先看人格库
+              </Link>
             </div>
 
-            <div className="grid grid-cols-3 gap-3">
-              {stats.map((item) => (
-                <div
-                  key={item.label}
-                  className="surface-panel-strong rounded-[28px] p-4 md:p-5"
-                >
-                  <div className="font-mono text-2xl font-black text-black md:text-3xl">
-                    {item.value}
-                  </div>
-                  <div className="mt-1 text-sm text-black/56">{item.label}</div>
-                </div>
-              ))}
+            <div className="mt-10 flex flex-wrap gap-8 text-sm text-black/54">
+              <div>
+                <div className="font-mono text-2xl font-black text-black">30</div>
+                <div className="mt-1">道题</div>
+              </div>
+              <div>
+                <div className="font-mono text-2xl font-black text-black">5</div>
+                <div className="mt-1">个模型</div>
+              </div>
+              <div>
+                <div className="font-mono text-2xl font-black text-black">27+1</div>
+                <div className="mt-1">种人格</div>
+              </div>
             </div>
           </div>
 
-          <div className="relative flex items-center justify-center">
-            <div className="surface-panel-strong relative w-full rounded-[32px] p-6 md:p-8">
-              <div className="absolute right-5 top-5 rounded-full border border-black/10 bg-white/70 px-3 py-1 font-mono text-[11px] font-bold tracking-[0.2em] text-black/46">
-                PREVIEW
-              </div>
-              <span className="editorial-kicker">Selected Types</span>
-              <h2 className="display-font mt-4 max-w-sm text-4xl leading-tight text-black md:text-5xl">
-                像提案封面一样醒目的设计师测试站
-              </h2>
+          <div className="hero-stage fade-in">
+            <div className="hero-stage-code">DBTI</div>
+            <div className="hero-stage-label">Poster / Preview / Personality Atlas</div>
 
-              <div className="mt-8 grid items-center gap-6 md:grid-cols-[280px_1fr]">
+            <div className="grid h-full items-end gap-8 lg:grid-cols-[0.84fr_1.16fr]">
+              <div className="relative flex min-h-[360px] items-center justify-center">
+                <div className="hero-stage-disc" />
                 <CharacterSVG
                   type="DBTI"
-                  size={280}
-                  accent="#FF6B2C"
-                  className="mx-auto float-animation"
+                  size={330}
+                  accent="#101116"
+                  className="relative z-10 float-animation"
                 />
+              </div>
+
+              <div className="flex h-full flex-col justify-between gap-6 border-t border-black/10 pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
+                <div>
+                  <div className="font-mono text-xs font-black tracking-[0.24em] text-black/42">
+                    TONE MIX / FOUR FEEDS / ONE RESULT
+                  </div>
+                  <h2 className="display-font mt-4 max-w-md text-4xl leading-tight text-black md:text-5xl">
+                    一个更像设计周刊封面的测试站
+                  </h2>
+                  <p className="mt-4 max-w-md text-sm leading-7 text-black/56 md:text-base">
+                    不是模板式问卷，而是把真实工作流、职场空气和互联网黑话一起压进结果里。
+                  </p>
+                </div>
 
                 <div className="space-y-3">
                   {featuredTypes.map((type) => (
-                    <div
-                      key={type.code}
-                      className="rounded-[26px] border border-black/8 bg-white/66 px-4 py-4"
-                    >
-                      <div className="flex items-center justify-between gap-4">
-                        <div>
-                          <div
-                            className="font-mono text-base font-black tracking-[0.16em]"
-                            style={{ color: type.color }}
-                          >
-                            {type.code}
-                          </div>
-                          <div className="mt-1 text-lg font-semibold text-black/88">
-                            {type.name}
-                          </div>
-                        </div>
-                        <span className="text-xs text-black/46">
-                          {type.motto}
-                        </span>
+                    <div key={type.code} className="editorial-persona-row">
+                      <div className="font-mono text-sm font-black tracking-[0.18em]" style={{ color: type.color }}>
+                        {type.code}
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="text-lg font-semibold text-black/88">{type.name}</div>
+                        <div className="mt-1 text-sm text-black/48">{type.motto}</div>
                       </div>
                     </div>
                   ))}
@@ -175,35 +203,39 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+        <div className="ticker-strip">
+          <div className="ticker-track">
+            {[...tickerItems, ...tickerItems].map((item, index) => (
+              <span key={`${item}-${index}`} className="ticker-chip">
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
       </section>
 
-      <section className="border-b border-black/8 px-5 py-16 md:px-8 md:py-20">
-        <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.72fr_1fr]">
+      <section className="px-5 py-16 md:px-8 md:py-20">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.78fr_1.22fr]">
           <div>
             <span className="editorial-kicker">Five Models</span>
-            <h2 className="display-font mt-4 text-4xl leading-tight text-black md:text-5xl">
-              测的不是审美题，
+            <h2 className="display-font mt-5 text-4xl leading-tight text-black md:text-5xl">
+              测的不是会不会做图，
               <br />
-              是你的工作方式。
+              是你在圈里的行事方式。
             </h2>
-            <p className="mt-5 max-w-md text-base leading-7 text-black/62">
-              这个版本不照搬程序员语义，而是把设计师真实的协作、改稿、提案、
-              Figma 和 AI 使用方式拆成 15 个维度来测。
+            <p className="mt-5 max-w-md text-base leading-7 text-black/58">
+              每个模型只做一件事：解释你的偏好、协作方式、出片节奏和工具依赖，不重复、不堆料。
             </p>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-1 border-t border-black/10">
             {modelBlocks.map((block) => (
-              <div
-                key={block.code}
-                className="flex gap-4 border-t border-black/10 py-4 first:border-t-0 first:pt-0"
-              >
-                <div className="font-mono text-lg font-black text-black/34">
-                  {block.code}
-                </div>
+              <div key={block.code} className="editorial-split-row">
+                <div className="font-mono text-lg font-black text-black/34">{block.code}</div>
                 <div>
-                  <h3 className="text-lg font-semibold text-black/88">{block.title}</h3>
-                  <p className="mt-1 text-sm leading-6 text-black/58">{block.desc}</p>
+                  <h3 className="text-xl font-semibold text-black/88">{block.title}</h3>
+                  <p className="mt-2 max-w-xl text-sm leading-7 text-black/58">{block.desc}</p>
                 </div>
               </div>
             ))}
@@ -211,62 +243,89 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="px-5 py-16 md:px-8 md:py-20">
-        <div className="mx-auto max-w-6xl">
-          <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
-            <div>
-              <span className="editorial-kicker">Example Outcomes</span>
-              <h2 className="display-font mt-4 text-4xl leading-tight text-black md:text-5xl">
-                不是只有一种设计师能赢。
-              </h2>
-            </div>
-            <Link href="/types" className="secondary-button w-fit">
-              打开人格库
-            </Link>
+      <section className="border-y border-black/10 px-5 py-16 md:px-8 md:py-20">
+        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.72fr_1.28fr]">
+          <div>
+            <span className="editorial-kicker">Tone Mix</span>
+            <h2 className="display-font mt-5 text-4xl leading-tight text-black md:text-5xl">
+              这套黑话不是乱写的，
+              <br />
+              是四种圈层语气混出来的。
+            </h2>
+            <p className="mt-5 max-w-md text-base leading-7 text-black/58">
+              所以它既有出片感，也有打工人求生感，还自带一层过会、拉齐和提案空气。
+            </p>
           </div>
 
-          <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {featuredTypes.map((type) => (
-              <div
-                key={type.code}
-                className="surface-panel rounded-[30px] p-5"
-              >
-                <CharacterSVG
-                  type={type.code}
-                  accent={type.color}
-                  size={112}
-                  className="mb-5"
-                />
-                <div
-                  className="font-mono text-sm font-black tracking-[0.16em]"
-                  style={{ color: type.color }}
-                >
-                  {type.code}
+          <div className="grid gap-4 md:grid-cols-2">
+            {toneBlocks.map((block) => (
+              <div key={block.title} className="tone-panel">
+                <div className="font-mono text-xs font-black tracking-[0.24em] text-black/42">
+                  {block.title}
                 </div>
-                <h3 className="mt-2 text-xl font-semibold text-black/88">
-                  {type.name}
-                </h3>
-                <p className="mt-3 text-sm leading-6 text-black/56">
-                  {type.description}
-                </p>
+                <p className="mt-5 text-base leading-7 text-black/66">{block.desc}</p>
               </div>
             ))}
           </div>
+        </div>
+      </section>
 
-          <div className="surface-panel-strong mt-12 rounded-[34px] px-6 py-7 md:flex md:items-center md:justify-between md:px-8">
+      <section className="px-5 py-16 md:px-8 md:py-20">
+        <div className="mx-auto max-w-7xl">
+          <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+            <div>
+              <span className="editorial-kicker">Example Outcomes</span>
+              <h2 className="display-font mt-5 text-4xl leading-tight text-black md:text-5xl">
+                不是只有一种画风能赢。
+              </h2>
+            </div>
+            <Link href="/types" className="ghost-button w-fit">
+              打开全部人格
+            </Link>
+          </div>
+
+          <div className="mt-10 border-t border-black/10">
+            {featuredTypes.map((type) => (
+              <div key={type.code} className="library-row">
+                <div className="flex items-center gap-4">
+                  <CharacterSVG type={type.code} accent={type.color} size={88} />
+                  <div>
+                    <div className="font-mono text-sm font-black tracking-[0.18em]" style={{ color: type.color }}>
+                      {type.code}
+                    </div>
+                    <h3 className="mt-2 text-2xl font-semibold text-black/88">{type.name}</h3>
+                    <p className="mt-2 text-sm text-black/48">「{type.motto}」</p>
+                  </div>
+                </div>
+                <p className="max-w-xl text-sm leading-7 text-black/58">{type.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-5 pb-16 md:px-8 md:pb-20">
+        <div className="mx-auto max-w-7xl border-t border-black/10 pt-10">
+          <div className="grid gap-8 lg:grid-cols-[1.08fr_0.92fr]">
             <div>
               <span className="editorial-kicker">Ready</span>
-              <h3 className="display-font mt-3 text-3xl leading-tight text-black md:text-4xl">
+              <h2 className="display-font mt-5 max-w-3xl text-4xl leading-tight text-black md:text-6xl">
                 {SITE_HOOK}
-              </h3>
+              </h2>
             </div>
-            <div className="mt-5 flex flex-wrap gap-3 md:mt-0">
-              <Link href="/test" className="primary-button">
-                现在开始
-              </Link>
-              <Link href="/types" className="secondary-button">
-                先看全部类型
-              </Link>
+
+            <div className="flex flex-col items-start justify-between gap-6 lg:items-end">
+              <p className="max-w-md text-sm leading-7 text-black/56 lg:text-right">
+                现在就能本地直接开测，看看你更像封面脑、种草体、求生派，还是过会王。
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Link href="/test" className="primary-button">
+                  现在开始
+                </Link>
+                <Link href="/types" className="ghost-button">
+                  先看图鉴
+                </Link>
+              </div>
             </div>
           </div>
 

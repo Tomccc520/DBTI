@@ -15,11 +15,11 @@ interface Props {
 }
 
 const modelLabels: Record<string, string> = {
-  V: "视觉信仰",
-  R: "需求应对",
-  C: "协作关系",
-  I: "创意驱动",
-  T: "工具共生",
+  V: "像素结界",
+  R: "改稿渡劫",
+  C: "嘴替战力",
+  I: "灵感上头",
+  T: "外挂共生",
 };
 
 const modelColors: Record<string, string> = {
