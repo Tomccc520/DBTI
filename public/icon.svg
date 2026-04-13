@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF6B2C" />
+      <stop offset="1" stop-color="#2F6BFF" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="url(#bg)" />
+  <rect x="12" y="12" width="40" height="40" rx="12" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.28)" />
+  <text x="19" y="38" font-family="Avenir Next, system-ui, sans-serif" font-size="19" font-weight="900" fill="white" letter-spacing="1.2">DB</text>
+  <text x="20" y="51" font-family="Avenir Next, system-ui, sans-serif" font-size="9" font-weight="800" fill="white" opacity="0.82" letter-spacing="3">TI</text>
+</svg>
