@@ -300,7 +300,7 @@ export default function ResultPage() {
   }
 
   const { personality, similarity, dimensions, matchDetails } = result;
-  const shareText = `我在 ${SITE_NAME} 设计师人格测试中测出了【${personality.code} · ${personality.name}】\n「${personality.motto}」\n匹配度 ${similarity}%\n\n来测测你是哪一型设计师 👉 ${getSiteUrl()}`;
+  const shareText = `我在 ${SITE_NAME} ${SITE_FULL_NAME} 中测出了【${personality.code} · ${personality.name}】\n「${personality.motto}」\n匹配度 ${similarity}%\n\n来测测你是哪一型设计师 👉 ${getSiteUrl()}`;
 
   /**
    * 复制分享文案到剪贴板。

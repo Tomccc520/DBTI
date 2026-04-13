@@ -10,24 +10,33 @@ import "./globals.css";
 import {
   AUTHOR_NAME,
   AUTHOR_URL,
-  SITE_DESCRIPTION,
+  OG_DESCRIPTION,
+  OG_TITLE,
   SITE_FULL_NAME,
   SITE_NAME,
+  SITE_DESCRIPTION,
 } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: `${SITE_NAME} - ${SITE_FULL_NAME}`,
+  applicationName: SITE_NAME,
+  title: `${SITE_NAME} · ${SITE_FULL_NAME}`,
   description: SITE_DESCRIPTION,
   keywords: ["DBTI", "设计师测试", "设计人格", "UI 设计", "视觉设计", "Figma"],
   authors: [{ name: AUTHOR_NAME, url: AUTHOR_URL }],
   icons: { icon: "/icon.svg", shortcut: "/icon.svg", apple: "/icon.svg" },
   openGraph: {
-    title: `${SITE_NAME} - 你是什么类型的设计师？`,
-    description: SITE_DESCRIPTION,
+    title: OG_TITLE,
+    description: OG_DESCRIPTION,
+    siteName: SITE_NAME,
     type: "website",
-    url: "http://localhost:3000",
+    url: "http://localhost:5150",
   },
-  metadataBase: new URL("http://localhost:3000"),
+  twitter: {
+    card: "summary_large_image",
+    title: OG_TITLE,
+    description: OG_DESCRIPTION,
+  },
+  metadataBase: new URL("http://localhost:5150"),
 };
 
 /**

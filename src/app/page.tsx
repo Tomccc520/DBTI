@@ -13,8 +13,11 @@ import {
   AUTHOR_URL,
   COPYRIGHT_LABEL,
   COPYRIGHT_URL,
+  SITE_ENGLISH_NAME,
   SITE_FULL_NAME,
+  SITE_HOOK,
   SITE_NAME,
+  SITE_TAGLINE,
 } from "@/lib/constants";
 
 const featuredCodes = ["GRID", "MOOD", "CURSOR", "BENTO"];
@@ -88,7 +91,7 @@ export default function Home() {
         <div className="mx-auto grid min-h-screen max-w-6xl gap-10 px-5 pb-14 pt-28 md:px-8 lg:grid-cols-[1.05fr_0.95fr]">
           <div className="flex flex-col justify-between gap-10">
             <div className="slide-up">
-              <span className="editorial-kicker">Designer Behavior Type Indicator</span>
+              <span className="editorial-kicker">{SITE_ENGLISH_NAME}</span>
               <h1 className="display-font mt-5 text-[5rem] leading-none tracking-[-0.06em] text-black md:text-[7rem]">
                 {SITE_NAME}
               </h1>
@@ -96,8 +99,8 @@ export default function Home() {
                 {SITE_FULL_NAME}
               </p>
               <p className="mt-6 max-w-xl text-base leading-7 text-black/62 md:text-lg">
-                30 道和设计工作流相关的选择题，从视觉信仰、需求应对、协作关系、
-                创意驱动、工具共生五个角度，测出你的设计人格类型。
+                {SITE_TAGLINE} 通过 30 道和设计工作流相关的选择题，从视觉信仰、
+                需求应对、协作关系、创意驱动、工具共生五个角度，测出你的设计人格类型。
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link href="/test" className="primary-button">
@@ -254,7 +257,7 @@ export default function Home() {
             <div>
               <span className="editorial-kicker">Ready</span>
               <h3 className="display-font mt-3 text-3xl leading-tight text-black md:text-4xl">
-                你是 GRID、MOOD，还是隐藏人格 PANTONE？
+                {SITE_HOOK}
               </h3>
             </div>
             <div className="mt-5 flex flex-wrap gap-3 md:mt-0">

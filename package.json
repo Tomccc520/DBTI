@@ -1,11 +1,12 @@
 {
   "name": "dbti",
+  "description": "30 道题，从 5 大模型、15 个维度测出你的设计人格。",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 5150",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 5150",
     "lint": "eslint"
   },
   "dependencies": {
